@@ -1,0 +1,7 @@
+Site para settar VSCode : https://code.visualstudio.com/docs/python/python-tutorial
+
+
+Ler arquivos da utildiades;
+Extrair dados de varios arquivos;
+Montar uma BD centralizada;
+Regrassão multivariavel para prever consumo de areas individuais

@@ -14,163 +14,169 @@
     <div>
         <img class="background_style">
         <div class="header">
-            <img class="logo_Projeto" src="images/Zeus.png" height="124" width="432">
-            <!-- style="position:fixed; marging-left: 127px; margin-top: 33px" -->
+            <div class="logos">
+                <img class="logo_Projeto" src="images/Zeus.png" height="124" width="432">
+                <img class="logo_Labs" src="images/7Labs.png" height="124" width="82.31">
+            </div>
             <h2 class="title">
                 Predição de Consumo E&F
             </h2>
-            <img class="logo_Labs" src="images/7Labs.png" height="124" width="82.31">
         </div>
 
         <div class="body">
-        </div>
+            <div class="input_block">
+                <h2 class="title_prod">
+                    Tendência de Produção
+                </h2>
+                <hr>
+                <div class="total_Areas">
+                    <div class="input_Data">
+                        <div class="area">
+                            <h3 class="production_area">
+                                Ret
+                            </h3>
+                        </div>
+                        <div class="area_container">
+                            <div class="line">
+                                <h4 class="information_panel">
+                                    501:
+                                </h4>
+                                <input type="number" id="pl_501">
+                                <h4 class="information_panel">
+                                    hl
+                                </h4>
+                            </div>
 
+                            <div class="line">
+                                <h4 class="information_panel">
+                                    502:
+                                </h4>
+                                <input type="number" id="pl_502">
+                                <h4 class="information_panel">
+                                    hl
+                                </h4>
+                            </div>
+                            <div class="line">
+                                <h4 class="information_panel">
+                                    503:
+                                </h4>
+                                <input type="number" id="pl_503">
+                                <h4 class="information_panel">
+                                    hl
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
 
-        <div class="input_block">
-            <h2 class="title">
-                Tendência de Produção
-            </h2>
-            <hr>
-            <div class="input_Data">
-                <div class="area">
-                    <h3 class="production_area">
-                        Ret
-                    </h3>
+                    <div class="input_Data">
+                        <div class="area">
+                            <h3 class="production_area">
+                                OW
+                            </h3>
+                        </div>
+                        <div class="area_container">
+                            <div class="line">
+                                <h4 class="information_panel">
+                                    511:
+                                </h4>
+                                <input type="number" id="pl_511">
+                                <h4 class="information_panel">
+                                    hl
+                                </h4>
+                            </div>
+
+                            <div class="line">
+                                <h4 class="information_panel">
+                                    512:
+                                </h4>
+                                <input type="number" id="pl_512">
+                                <h4 class="information_panel">
+                                    hl
+                                </h4>
+                            </div>
+
+                            <div class="line">
+                                <h4 class="information_panel">
+                                    561:
+                                </h4>
+                                <input type="number" id="pl_561">
+                                <h4 class="information_panel">
+                                    hl
+                                </h4>
+                            </div>
+
+                            <div class="line">
+                                <h4 class="information_panel">
+                                    562:
+                                </h4>
+                                <input type="number" id="pl_562">
+                                <h4 class="information_panel">
+                                    hl
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input_Data">
+                        <div class="area">
+                            <h3 class="production_area">
+                                Processo
+                            </h3>
+                        </div>
+                        <div class="area_container">
+                            <div class="line">
+                                <h4 class="information_panel">
+                                    sala_1:
+                                </h4>
+                                <input type="number" id="pl_sala_1">
+                                <h4 class="information_panel">
+                                    hl
+                                </h4>
+                            </div>
+
+                            <div class="line">
+                                <h4 class="information_panel">
+                                    sala_2:
+                                </h4>
+                                <input type="number" id="pl_sala_2">
+                                <h4 class="information_panel">
+                                    hl
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-
                 <div>
-                    <h4 class="information_panel">
-                        501:
-                    </h4>
-                    <input type="number" id="pl_501">
-                    <h4 class="information_panel">
-                        hl
-                    </h4>
+                    <input type="button" value="Calcular">
                 </div>
 
-                <div>
-                    <h4 class="information_panel">
-                        502:
-                    </h4>
-                    <input type="number" id="pl_502">
-                    <h4 class="information_panel">
-                        hl
-                    </h4>
+            </div>
+
+
+            <div class="output">
+                <h2 class="title_cons">
+                    Tendência de Consumo
+                </h2>
+                <hr>
+                <div class="output_container">
+                    <div class="output_pred">
+                        <img src="images\Energy_Symbol.png" alt="Predição de consumo de EE" width="96" height="96">
+                        <h4 class="output_panel">
+                            8.000 kWh
+                        </h4>
+                    </div>
+                    <div class=" output_pred">
+                        <img src="images\Water_Symbol.png " alt="Predição de consumo de EE " width="96 " height="96 ">
+                        <h4 class="output_panel">
+                            8.000 kWh
+                        </h4>
+                    </div>
+                    <div class="output_pred">
+                        <img src="images\CO2_Symbol.png" alt="Predição de consumo de EE" width="96" height="96">
+                        <h4 class="output_panel">
+                            8.000 kWh
+                        </h4>
+                    </div>
                 </div>
-                <div>
-                    <h4 class="information_panel">
-                        503:
-                    </h4>
-                    <input type="number" id="pl_503">
-                    <h4 class="information_panel">
-                        hl
-                    </h4>
-                </div>
-            </div>
-
-            <div class="input_Data">
-                <div class="area">
-                    <h3 class="production_area">
-                        OW
-                    </h3>
-                </div>
-
-                <div>
-                    <h4 class="information_panel">
-                        511:
-                    </h4>
-                    <input type="number" id="pl_511">
-                    <h4 class="information_panel">
-                        hl
-                    </h4>
-                </div>
-
-                <div>
-                    <h4 class="information_panel">
-                        512:
-                    </h4>
-                    <input type="number" id="pl_512">
-                    <h4 class="information_panel">
-                        hl
-                    </h4>
-                </div>
-            </div>
-
-            <div>
-                <h4 class="information_panel">
-                    561:
-                </h4>
-                <input type="number" id="pl_561">
-                <h4 class="information_panel">
-                    hl
-                </h4>
-            </div>
-
-            <div>
-                <h4 class="information_panel">
-                    562:
-                </h4>
-                <input type="number" id="pl_562">
-                <h4 class="information_panel">
-                    hl
-                </h4>
-            </div>
-        </div>
-
-        <div class="input_Data">
-            <div class="area">
-                <h3 class="production_area">
-                    Processo
-                </h3>
-            </div>
-
-            <div>
-                <h4 class="information_panel">
-                    sala_1:
-                </h4>
-                <input type="number" id="pl_sala_1">
-                <h4 class="information_panel">
-                    hl
-                </h4>
-            </div>
-
-            <div>
-                <h4 class="information_panel">
-                    sala_2:
-                </h4>
-                <input type="number" id="pl_sala_2">
-                <h4 class="information_panel">
-                    hl
-                </h4>
-            </div>
-        </div>
-        <div>
-            <input type="button" value="Calcular">
-        </div>
-
-
-
-        <div class="output">
-            <h2 class="title">
-                Tendência de Consumo
-            </h2>
-            <div class="output_pred">
-                <img src="images\Energy_Symbol.png" alt="Predição de consumo de EE" width="96" height="96">
-                <h4 class="output_panel">
-                    8.000 kWh
-                </h4>
-            </div>
-            <div class=" output_pred ">
-                <img src="images\Water_Symbol.png " alt="Predição de consumo de EE " width="96 " height="96 ">
-                <h4 class="output_panel">
-                    8.000 kWh
-                </h4>
-            </div>
-            <div class="output_pred">
-                <img src="images\CO2_Symbol.png" alt="Predição de consumo de EE" width="96" height="96">
-                <h4 class="output_panel">
-                    8.000 kWh
-                </h4>
             </div>
         </div>
     </div>

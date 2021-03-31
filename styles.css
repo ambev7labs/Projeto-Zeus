@@ -1,0 +1,63 @@
+/*
+clip path
+chips css
+
+font-family: 'Nunito Sans', sans-serif;
+*/
+
+body {
+    font-family: 'Nunito Sans', sans-serif;
+    background-color: #4F628E;
+}
+
+.header {
+    display: flex;
+}
+
+.logo_Projeto {}
+
+.logo_Labs {}
+
+.Nome_Escrito {}
+
+
+/* Formatação de Textos */
+
+.title {
+    font-size: 53px;
+    color: #FFF;
+}
+
+.information_panel {
+    font-size: 46px;
+    color: #FFF;
+}
+
+.production_area {
+    font-size: 33px;
+    color: #000;
+}
+
+.output_panel {
+    font-size: 33px;
+    color: #FFF;
+}
+
+.output {
+    display: inline-block;
+    padding: 0 25px;
+    height: 50px;
+    font-size: 16px;
+    line-height: 50px;
+    border-radius: 25px;
+    background-color: #421B61;
+}
+
+.output_pred img {
+    float: left;
+    margin: 0 10px 0 -25px;
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    background-color: ;
+}

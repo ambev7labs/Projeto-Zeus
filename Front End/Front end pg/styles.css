@@ -5,16 +5,12 @@ chips css
 font-family: 'Nunito Sans', sans-serif;
 */
 
-body {
-    font-family: 'Nunito Sans', sans-serif;
-    background-color: #4F628E;
-}
-
 .header {
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
     flex-grow: 1;
+    height: 250px;
 }
 
 .logos {
@@ -24,15 +20,23 @@ body {
     justify-content: space-around;
 }
 
+/* Caso queira ajustar cada logo individualmente
 .logo_Projeto {}
 
 .logo_Labs {}
 
 .Nome_Escrito {}
+*/
+
+body {
+    font-family: 'Nunito Sans', sans-serif;
+    background-color: #4F628E;
+}
 
 .input_block {
     display: flow-root;
     flex-grow: 4;
+    width: 780px;
 }
 
 .input_Data {
@@ -53,6 +57,7 @@ body {
 .body {
     display: flex;
     justify-content: space-around;
+    height: 518px;
 }
 
 .total_Areas {
@@ -64,20 +69,31 @@ body {
     background-color: #FFF;
     margin: 0 5%;
     border-radius: 5%;
-    height: 75%;
+    height: 80%;
+    margin-top: -50px;
+    z-index: -1;
+}
+
+.production_area {
+    font-size: 2em;
+    color: #FFF;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+}
+
+.area {
+    background-color: #421B61;
+    border-radius: 100px;
+    margin: 0 5%;
+    height: 10%;
 }
 
 .line>input {
     margin: 0 5%
 }
 
-.output_container {
-    margin-right: 5%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-around;
-}
+
 
 
 /* Formatação de Textos */
@@ -108,42 +124,42 @@ body {
     color: #000;
 }
 
-.production_area {
-    font-size: 2em;
-    color: #FFF;
-    text-align: center;
-    display: flex;
-    justify-content: center;
-}
 
-.area {
-    background-color: #421B61;
-    border-radius: 100px;
-    margin: 0 5%;
-}
 
-.output_panel {
-    font-size: 20px;
-    color: #FFF;
-}
+
 
 .output {
     display: flow-root;
     flex-grow: 2;
+    width: 584px;
+}
+
+.output_container {
+    margin-right: 5%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
 }
 
 .output_pred {
     display: flex;
     background-color: #421B61;
-    border-bottom-left-radius: 20px;
-    border-top-left-radius: 20px;
+    border-radius: 50px;
     margin: 5% 0%;
+    padding: 0 20px;
 }
 
 .output_pred img {
     float: left;
-    margin: 0 10px 0 -25px;
+    margin: 0 30px 0 -40px;
     height: 80px;
     width: 80px;
     border-radius: 50%;
+    background-color: #421B61;
+}
+
+.output_panel {
+    font-size: 20px;
+    color: #FFF;
 }

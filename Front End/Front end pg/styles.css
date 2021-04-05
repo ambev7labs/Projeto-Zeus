@@ -20,6 +20,7 @@ font-family: 'Nunito Sans', sans-serif;
     justify-content: space-around;
 }
 
+
 /* Caso queira ajustar cada logo individualmente
 .logo_Projeto {}
 
@@ -51,7 +52,7 @@ body {
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    margin: 10% 0%;
+    margin: 5% 0%;
 }
 
 .body {
@@ -69,13 +70,12 @@ body {
     background-color: #FFF;
     margin: 0 5%;
     border-radius: 5%;
-    height: 80%;
-    margin-top: -50px;
+    height: 90%;
+    margin-top: -40px;
     z-index: -1;
 }
 
 .production_area {
-    font-size: 2em;
     color: #FFF;
     text-align: center;
     display: flex;
@@ -87,13 +87,31 @@ body {
     border-radius: 100px;
     margin: 0 5%;
     height: 10%;
+    padding: -5px;
 }
 
 .line>input {
-    margin: 0 5%
+    margin: 0 5%;
+    width: 80px;
 }
 
+.Calcular {
+    margin-top: -6%;
+}
 
+.Calcular>input {
+    border-radius: 8px;
+    font-size: 24px;
+    background-color: #0A2144;
+    width: 96%;
+    color: #FFF;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    border-color: #FFF;
+    margin: 0 2%;
+    border: 1px solid white;
+}
 
 
 /* Formatação de Textos */
@@ -123,10 +141,6 @@ body {
     font-size: 1.5em;
     color: #000;
 }
-
-
-
-
 
 .output {
     display: flow-root;

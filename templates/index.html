@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Libélula GUI</title>
+
+        <link href="/static/bootstrap.css" rel="stylesheet">
+        <link href="/static/styles.css" rel="stylesheet">
+        <script src="/static/bootstrap.js"></script>
+        <script src="/static/axios.js"></script>
+        <script src="/static/jquery.js"></script>
+        <script src="/static/config.js"></script>
+    </head>
+
+    <body>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="div-logo-libelula">
+                        <img src="/static/imgs/logo.png" alt="dragonfly" class="img-logo">
+                        <div class="div-texto-logo">
+                            <span class="texto-logo">Projeto Libélula</span>
+                            <span class="subtexto-logo">Extensão de Guarulhos</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="menu">
+                        <span class="titulo-menu">Navegação</span>
+
+                        <div class="itens-menu">
+                            <div class="item-menu" onclick="navegar('/')">
+                                <span>Previsão</span>
+                            </div>
+
+                            <div class="item-menu" onclick="navegar('/treinamento')">
+                                <span>Treinamento</span>
+                            </div>
+
+                            <div class="item-menu" onclick="navegar('/upload')">
+                                <span>Upload</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-12 div-titulo">
+                    <span class="titulo-secao">Detalhes do Modelo</span>
+                </div>
+            </div>
+
+            <div class="row" id="detalhes-modelo"></div>
+
+            <div class="row">
+                <div class="col-12 div-titulo">
+                    <span class="titulo-secao">Área de Previsão</span>
+                </div>
+            </div>
+
+            <div class="row oculta" id="sem-treino">
+                <div class="col-12">
+                    <span>Sem treinamento realizado</span>
+                </div>
+            </div>
+
+            <div class="row formulario" id="div-prev"></div>
+
+            <div id="div-res" class="oculta">
+                <div class="row">
+                    <div class="col-12 div-titulo">
+                        <span class="titulo-secao">Resultado</span>
+                    </div>
+                </div>
+    
+                <div class="row resultado">
+                    <div class="col-12">
+                        <span id="res-text"></span>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+
+        <div class="conteiner-fluid fixed-bottom footer">
+            <div class="row">
+                <div class="col-12">
+                    <div class="content-footer">
+                        <span class="texto-footer">Ícones criados por <a href="https://www.flaticon.com/">flaticon</a></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal" id="modal-config">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Configurações Resultado</h5>
+                        <button type="button" class="btn close" onclick="closeConfig()">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="formulario-modal">
+                            <label for="terceiro">Consumo Terceiro</label>
+                            <input type="number" name="terceiro" id="terceiro" value="0">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </body>
+
+    <script>
+
+        let state = {};
+        init();
+
+        async function calcular() {
+            // Verifica integridade das configurações
+            const consumoTerceiro = parseInt($("#terceiro").val().replace(",", "."));
+            if(isNaN(consumoTerceiro) || consumoTerceiro < 0) {
+                alert("Informe um valor válido para o abatimento do consumo de terceiros.");
+                return;
+            }
+
+            // Recupera inputs
+            const entrada = [];
+            let erro = false;
+            for(let i = 0; i < state.config.varEntrada.length; i++) {
+                let valor = parseFloat($(`#ent-${i}`).val())
+                
+                if(isNaN(valor)) {
+                    erro = true;
+                    alert(`Informe um valor válido para a ${state.config.varEntrada[i]}`);
+                    break;
+                } else {
+                    entrada.push(valor)
+                }
+            }
+
+            // Faz o cálculo
+            if(!erro) {
+                try {
+                    const { data } = await axios.post(`${config.baseURL}/prever`, { entrada });
+                    const consumo = data.consumoPrevisto - consumoTerceiro;
+
+                    $("#div-res").removeClass("oculta");
+                    $("#res-text").html(`Valor previsto para ${state.config.varObjetivo}: ${consumo}`);
+                    alert("Previsão finalizazada com sucesso");
+                } catch(err) {
+                    console.log(err)
+                }
+            }
+        }
+
+        async function init() {
+            try {
+                const { data } = await axios.get(`${config.baseURL}/config`);
+
+                if(Object.keys(data.data).length == 0) {
+                    // Nenhum arquivo de configuração encontrado
+                    $("#sem-treino").removeClass("oculta");
+                    $("#div-prev").addClass("oculta")
+                } else {
+                    // Carrega colunas
+                    state.config = data.data;
+                    let div = "";
+                    for(let i = 0; i < state.config.varEntrada.length; i++) {
+                        div += `
+                        <div class="formulario-linha">
+                            <label for="ent-${i}">${state.config.varEntrada[i]}</label>
+                            <input type="number" name="ent-${i}" id="ent-${i}">
+                        </div>`;
+                    }
+
+                    // Atualiza tela
+                    div += `
+                    <div class="formulario-botoes">
+                        <div class="botao-ok" tabindex="0" onclick="calcular()">
+                            <span>Calcular</span>
+                        </div>
+
+                        <div class="botao-ok" tabindex="0" onclick="configurar()">
+                            <span>Configurar</span>
+                        </div>
+                    </div>`;
+                    $("#div-prev").html(div)
+
+                    // Carrega detalhes do modelo
+                    const paths = state.config.pathDataset.split("/");
+                    $("#detalhes-modelo").html(`
+                    <div class="col-md-6">
+                        <div class="res-treino">
+                            <span>Erro médio: ${state.config.treino.erroMedio.toFixed(2).replace(".", ",")}%</span>
+                            <span>Erro mínimo: ${state.config.treino.erroMin.toFixed(2).replace(".", ",")}%</span>
+                            <span>Erro máximo: ${state.config.treino.erroMax.toFixed(2).replace(".", ",")}%</span>
+                            <span>50% dos erros abaixo de: ${state.config.treino.erro50.toFixed(2).replace(".", ",")}%</span>
+                            <span>75% dos erros abaixo de: ${state.config.treino.erro75.toFixed(2).replace(".", ",")}%</span>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <div class="res-treino">
+                            <span>Arquivo de treino: ${paths[paths.length - 1]}</span>
+                            <span>Algoritmo de otimização: ${state.config.otimizador}</span>
+                            <span>Função de custo: ${state.config.custo}</span>
+                            <span>Porcentagem de treino: ${parseInt(state.config.splitTreino * 100)}%</span>
+                            <span>Epochs: ${state.config.iteracoes}</span>
+                        </div>
+                    </div>`);
+                }
+            } catch(err) {
+                console.log(err);
+            }
+        }
+
+        function configurar() {
+            $("#modal-config").modal("show");
+        }
+
+        function closeConfig() {
+            $("#modal-config").modal("hide");
+        }
+
+    </script>
+
+</html>

@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Libélula GUI</title>
+
+        <link href="/static/bootstrap.css" rel="stylesheet">
+        <link href="/static/styles.css" rel="stylesheet">
+        <script src="/static/bootstrap.js"></script>
+        <script src="/static/axios.js"></script>
+        <script src="/static/jquery.js"></script>
+        <script src="/static/config.js"></script>
+    </head>
+
+    <body>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="div-logo-libelula">
+                        <img src="/static/imgs/logo.png" alt="dragonfly" class="img-logo">
+                        <div class="div-texto-logo">
+                            <span class="texto-logo">Projeto Libélula</span>
+                            <span class="subtexto-logo">Extensão de Guarulhos</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="menu">
+                        <span class="titulo-menu">Navegação</span>
+
+                        <div class="itens-menu">
+                            <div class="item-menu" onclick="navegar('/')">
+                                <span>Previsão</span>
+                            </div>
+
+                            <div class="item-menu" onclick="navegar('/treinamento')">
+                                <span>Treinamento</span>
+                            </div>
+
+                            <div class="item-menu" onclick="navegar('/upload')">
+                                <span>Upload</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-12 div-titulo">
+                    <span class="titulo-secao">Sequência de Treinamento</span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <label class="subtitulo-secao">Selecione a base de treino</label>
+                    <select id="select-file" class="formulario-select" onchange="chain(0)"></select>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <label class="subtitulo-secao">Escolha a variável dependente (objetivo)</label>
+                    <select id="select-target" class="formulario-select" onchange="chain(1)"></select>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <label class="subtitulo-secao">Escolha as variáveis independentes (entrada)</label>
+                    <div class="lista-check" id="lista-check"></div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="formulario-botoes">
+                        <div class="botao-ok" tabindex="0" id="bt-treino" onclick="treinar()">
+                            <span>Treinar</span>
+                        </div>
+
+                        <div class="botao-ok" tabindex="0" onclick="configurar()">
+                            <span>Configurar</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="conteiner-fluid fixed-bottom footer">
+            <div class="row">
+                <div class="col-12">
+                    <div class="content-footer">
+                        <span class="texto-footer">Ícones criados por <a href="https://www.flaticon.com/">flaticon</a></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal" id="modal-config">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Configurações Avançadas</h5>
+                        <button type="button" class="btn close" onclick="closeConfig()">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="formulario-modal">
+                            <label for="split">Split Treino</label>
+                            <input type="number" name="split" id="split" value="0.8">
+                        </div>
+
+                        <div class="formulario-modal">
+                            <label for="epochs">Epochs</label>
+                            <input type="number" name="epochs" id="epochs" value="350">
+                        </div>
+
+                        <div class="formulario-modal">
+                            <label for="sel-opt">Algoritmo de Otimização</label>
+                            <select name="sel-opt" id="sel-opt">
+                                <option value="RMSprop">RMSprop</option>
+                                <option value="Adam">Adam</option>
+                                <option value="SGD">SGD</option>
+                            </select>
+                        </div>
+
+                        <div class="formulario-modal">
+                            <label for="sel-loss">Função de Custo</label>
+                            <select name="sel-loss" id="sel-loss">
+                                <option value="mean_squared_logarithmic_error">Erro quadrático logarítmico</option>
+                                <option value="mean_squared_error">Erro quadrático</option>
+                                <option value="mean_absolute_error">Erro absoluto</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal" id="modal-res">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Resultado do Treinamento</h5>
+                        <button type="button" class="btn close" onclick="closeLog()">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="res-treino"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </body>
+
+    <script>
+
+        let state = {};
+        init();
+
+        async function treinar() {
+            // Recupera os inputs
+            const indcArquivo = $("#select-file").val();
+            const indcTarget = $("#select-target").val();
+            const path = state.arquivos[indcArquivo].caminho;
+            const splitTreino = parseFloat($("#split").val().replace(",", "."));
+            const iteracoes = parseInt($("#epochs").val().replace(",", "."));
+            const otimizador = $("#sel-opt").val();
+            const custo = $("#sel-loss").val();
+
+            const varObjetivo = state.arquivos[indcArquivo].colunas[indcTarget];
+            const varEntrada = [];
+            for(let i = 0; i < state.arquivos[indcArquivo].colunas.length; i++) {
+                if(i != indcTarget && $(`#ent-${i}`).prop("checked")) {
+                    varEntrada.push(state.arquivos[indcArquivo].colunas[i]);
+                }
+            }
+
+            // Controle de erros
+            if(varEntrada.length == 0) {
+                alert("Selecione ao menos uma variável de entrada, para compor o aprendizado.");
+                return;
+            }
+
+            if(isNaN(splitTreino) || (splitTreino <= 0 || splitTreino >= 1)) {
+                alert("O split de treino deve estar entre 0 e 1.");
+                return;
+            }
+
+            if(isNaN(iteracoes) || iteracoes <= 0) {
+                alert("A quantidade de epochs deve ser maior que zero.");
+                return;
+            }
+
+            try {
+                // Liga o loading
+                $("#bt-treino").html(`
+                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                    <span>Treinando...</span>`);
+
+                // Treina e exibe log
+                const body = { path, varObjetivo, varEntrada, splitTreino, otimizador, iteracoes, custo };
+                const { data } = await axios.post(`${config.baseURL}/treinar`, body);
+
+                $("#modal-res").modal("show");
+                $(".res-treino").html(`
+                    <span>Erro mínimo atingido: ${data.data.erroMin.toFixed(2).replace(".", ",")}%</span>
+                    <span>Erro máximo do modelo: ${data.data.erroMax.toFixed(2).replace(".", ",")}%</span>
+                    <span>Erro médio do modelo: ${data.data.erroMedio.toFixed(2).replace(".", ",")}%</span>
+                    <span>50% dos erros estão abaixo de: ${data.data.erro50.toFixed(2).replace(".", ",")}%</span>
+                    <span>75% dos erros estão abaixo de: ${data.data.erro75.toFixed(2).replace(".", ",")}%</span>
+                `);
+
+            } catch(err) {
+                console.log(err);
+            } finally {
+                // Remove o loading
+                $("#bt-treino").html(`<span>Treinar</span>`);
+            }
+        }
+
+        function configurar() {
+            $("#modal-config").modal("show");
+        }
+
+        function closeConfig() {
+            $("#modal-config").modal("hide")
+        }
+
+        function closeLog() {
+            $("#modal-res").modal("hide");
+        }
+
+        async function init() {
+            try {
+                // Carrega informações
+                const { data } = await axios.get(`${config.baseURL}/arquivos`);
+                state.arquivos = data.data;
+
+                // Cria os inputs do select de arquivo
+                let listaArquivos = "";
+                for(let i = 0; i < state.arquivos.length; i++) {
+                    let paths = state.arquivos[i].caminho.split("/");
+                    listaArquivos += `<option value="${i}">${paths[paths.length - 1]}</option>`;
+                }
+                $("#select-file").html(listaArquivos)
+                chain(0)
+            } catch(err) {
+                console.log(err);
+            }
+        }
+
+        function chain(posicao) {
+            const opcaoArquivo = $("#select-file").val();
+
+            switch(posicao) {
+                case 0:
+                    let opcoes = "";
+                    for(let i = 0; i < state.arquivos[opcaoArquivo].colunas.length; i++) {
+                        opcoes += `<option value="${i}">${state.arquivos[opcaoArquivo].colunas[i]}</option>`;
+                    }
+                    $("#select-target").html(opcoes);
+                case 1:
+                    const opcaoTarget = $("#select-target").val();
+                    let checks = "";
+                    for(let i = 0; i < state.arquivos[opcaoArquivo].colunas.length; i++) {
+                        if(i != opcaoTarget) {
+                            checks += `
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="ent-${i}">
+                                <label class="form-check-label" for="ent-${i}">${state.arquivos[opcaoArquivo].colunas[i]}</label>
+                            </div>`;
+                        }
+                    }
+                    $("#lista-check").html(checks);
+            }
+        }
+
+    </script>
+
+</html>

@@ -7,16 +7,6 @@ def home():
     return StaticRoutes.home()
 
 
-@app.route("/treinamento", methods=["GET"])
-def treinamento():
-    return StaticRoutes.treinamento()
-
-
-@app.route("/upload", methods=["GET"])
-def upload():
-    return StaticRoutes.upload()
-
-
 @app.route("/arquivos", methods=["GET"])
 def arquivos():
     return Routes.listarData()

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Libélula GUI</title>
+
+        <link href="/static/bootstrap.css" rel="stylesheet">
+        <link href="/static/styles.css" rel="stylesheet">
+        <script src="/static/bootstrap.js"></script>
+        <script src="/static/axios.js"></script>
+        <script src="/static/jquery.js"></script>
+        <script src="/static/config.js"></script>
+    </head>
+
+    <body>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="div-logo-libelula">
+                        <img src="/static/imgs/logo.png" alt="dragonfly" class="img-logo">
+                        <div class="div-texto-logo">
+                            <span class="texto-logo">Projeto Libélula</span>
+                            <span class="subtexto-logo">Extensão de Guarulhos</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="menu">
+                        <span class="titulo-menu">Navegação</span>
+
+                        <div class="itens-menu">
+                            <div class="item-menu" onclick="navegar('/')">
+                                <span>Previsão</span>
+                            </div>
+
+                            <div class="item-menu" onclick="navegar('/treinamento')">
+                                <span>Treinamento</span>
+                            </div>
+
+                            <div class="item-menu" onclick="navegar('/upload')">
+                                <span>Upload</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-12 div-titulo">
+                    <span class="titulo-secao">Área para Upload de Planilhas</span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="formulario">
+                        <div class="formulario-linha">
+                            <label for="arquivo">Selecione o arquivo</label>
+                            <input type="file" name="arquivo" id="arquivo" accept=".xlsx, .xls">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="formulario-botoes">
+                        <div class="botao-ok" tabindex="0" onclick="salvar()">
+                            <span>Salvar</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="conteiner-fluid fixed-bottom footer">
+            <div class="row">
+                <div class="col-12">
+                    <div class="content-footer">
+                        <span class="texto-footer">Ícones criados por <a href="https://www.flaticon.com/">flaticon</a></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </body>
+
+    <script>
+
+        async function salvar() {
+            // Recupera os arquivos informados
+            const formData = new FormData();
+            const arquivos = $("#arquivo").prop("files");
+            
+            if(arquivos.length == 0) {
+                alert("Escolha uma planilha para ser anexada à base de dados.");
+                return;
+            }
+
+            try {
+                formData.append("file", arquivos[0]);
+                const { data } = await axios.post(`${config.baseURL}/arquivo`, formData, {
+                    headers: { "Content-Type": "multipart/form-data" }
+                });
+                if(data.status == 200) {
+                    alert("Arquivo salvo com sucesso.");
+                } else {
+                    alert("Ocorreu uma falha de upload, o arquivo não é válido.");
+                }
+            } catch(err) {
+                console.log(err);
+            }
+        }
+
+    </script>
+
+</html>

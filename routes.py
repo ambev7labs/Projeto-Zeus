@@ -10,15 +10,7 @@ class StaticRoutes:
 
     @staticmethod
     def home():
-        return render_template("index.html")
-
-    @staticmethod
-    def treinamento():
-        return render_template("treinamento.html")
-
-    @staticmethod
-    def upload():
-        return render_template("upload.html")
+        return render_template("home.html")
 
 
 class Routes:

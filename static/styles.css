@@ -1,0 +1,51 @@
+/* Definições globais */
+body { padding-bottom: 50px; }
+.oculta { display: none; }
+
+
+/* Definições do logo */
+.div-logo-libelula { display: flex; align-items: center; justify-content: center; margin-top: 50px; }
+.div-texto-logo { display: flex; flex-direction: column; margin-left: 40px; }
+.img-logo { width: 40px; transform: rotate(45deg); }
+.texto-logo { font-family: system-ui; font-size: 25px; }
+.subtexto-logo { font-family: system-ui; font-size: 15px; }
+
+
+/* Definições do menu de navegação */
+.menu { display: flex; justify-content: center; flex-direction: column; margin-top: 30px; }
+.titulo-menu { font-family: system-ui; font-size: 20px; font-weight: bold; margin-bottom: 5px; }
+.itens-menu { display: flex; align-items: center; padding-bottom: 5px; border-bottom: 2px solid #928f8f; }
+.item-menu { cursor: pointer; background-color: #f5f5f5; padding: 5px 10px; }
+.item-menu:hover { background-color: #f9bb4b; color: #f5f5f5; }
+
+
+/* Definições do footer */
+.footer { background-color: #f5f5f5; }
+.content-footer { display: flex; align-items: center; height: 50px; }
+.texto-footer { font-family: system-ui; margin-left: 40px; font-size: 12px; }
+
+
+/* Definições de elementos de seção */
+.div-titulo { margin-top: 30px; margin-bottom: 10px; }
+.titulo-secao { font-family: system-ui; font-size: 23px; font-weight: bold; }
+.subtitulo-secao { font-family: system-ui; font-size: 18px; }
+
+.formulario { margin-bottom: 20px; }
+.formulario-linha { display: flex; justify-content: space-between; margin-bottom: 20px; }
+.formulario-linha label { font-size: 18px; font-family: system-ui; margin-bottom: 3px; }
+.formulario-linha input { width: 100%; max-width: 50%; padding: 2px 5px; }
+.formulario-botoes { display: flex; align-items: center; justify-content: flex-end; margin-top: 20px; }
+.botao-ok { cursor: pointer; background-color: #f5f5f5; border-radius: 2px; padding: 5px 20px; transition: filter 0.5s; margin-left: 10px; }
+.botao-ok:hover { filter: brightness(90%); }
+
+.resultado { margin-bottom: 20px; }
+.resultado span { font-family: system-ui; font-size: 18px; }
+.res-treino { display: flex; flex-direction: column; }
+.res-treino span { font-family: system-ui; font-size: 18px; margin-bottom: 2px; }
+
+.formulario-modal { display: flex; flex-direction: column; justify-content: center;  margin-bottom: 20px; }
+.formulario-modal label { font-size: 18px; font-family: system-ui; margin-bottom: 3px; }
+.formulario-modal input { width: 100%; padding: 2px 5px; }
+.formulario-modal select { width: 100%; padding: 3px 10px; border-radius: 3px; }
+
+.formulario-select { width: 100%; padding: 3px 10px; border-radius: 3px; margin-bottom: 20px; }

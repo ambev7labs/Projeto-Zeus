@@ -7,7 +7,6 @@ font-family: 'Nunito Sans', sans-serif;
 
 .header {
     display: flex;
-    justify-content: space-around;
     flex-wrap: wrap;
     flex-grow: 1;
     height: 80px;
@@ -17,21 +16,24 @@ font-family: 'Nunito Sans', sans-serif;
     display: flex;
     flex-basis: 100%;
     flex-grow: 1;
-    justify-content: space-evenly;
+    height: 80px;
 }
-
 
 .logo_Labs {
-    float:right;
+    float: right;
     padding-right: 10px;
 }
+
 .logo_Projeto {
     padding-left: 10px;
 }
+
 .Nome_Escrito {
     padding-left: 10px;
     padding-right: 10px;
 }
+
+
 /* Caso queira ajustar cada logo individualmente
 
 
@@ -43,7 +45,7 @@ body {
     background-color: white;
 }
 
-.teste{
+.teste {
     clip-path: polygon(100% 0, 0 61%, 100% 82%);
     background: black;
     z-index: -1;
@@ -76,7 +78,6 @@ body {
     display: flex;
     justify-content: space-around;
     height: 518px;
-
 }
 
 .total_Areas {
@@ -92,8 +93,6 @@ body {
     margin-top: -40px;
     z-index: -1;
 }
-
-
 
 .production_area {
     color: #FFF;
@@ -123,7 +122,7 @@ body {
     border-radius: 8px;
     font-size: 24px;
     background-color: #0A2144;
-    width: 96%;
+    width: 100%;
     color: #FFF;
     text-align: center;
     display: flex;
@@ -199,25 +198,33 @@ body {
 }
 
 .grid {
-	display: grid;
+    display: grid;
 }
+
 
 /* 100px é o valor total, ignora conteúdo, margem e etc. Respeita apenas o min-width do item.*/
+
 .grid-template-columns-1 {
-	grid-template-columns: 100px 100px 100px 100px;
+    grid-template-columns: 100px 100px 100px 100px;
 }
+
 
 /* fr é uma unidade fracional */
+
 .grid-template-columns-2 {
-	grid-template-columns: 1.5fr 1fr;
+    grid-template-columns: 1.5fr 1fr;
 }
+
 
 /* minmax define um valor mínimo e máximo para a coluna */
+
 .grid-template-columns-3 {
-	grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
 }
 
+
 /* Estilos Gerais */
+
 .input_Data_2 {
     margin-left: 10px;
     margin-top: 10px;
@@ -225,8 +232,8 @@ body {
 }
 
 .grid {
-	margin: 0 auto;
-	/* border: 1px solid #ccc; */
+    margin: 0 auto;
+    /* border: 1px solid #ccc; */
 }
 
 .area_container_2 {
@@ -258,13 +265,12 @@ body {
     border-radius: 8px;
     font-size: 24px;
     background-color: #0A2144;
-    width: 96%;
+    width: 100%;
     color: #FFF;
     text-align: center;
     display: flex;
     justify-content: center;
     border-color: #FFF;
-    margin: 0 2%;
     border: 1px solid white;
 }
 
@@ -274,8 +280,7 @@ body {
     border-left: 150vw solid transparent;
     height: 0;
     z-index: -1;
-    position:absolute;
-
+    position: absolute;
 }
 
 .title_2 {

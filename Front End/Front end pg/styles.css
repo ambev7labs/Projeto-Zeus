@@ -10,28 +10,37 @@ font-family: 'Nunito Sans', sans-serif;
     justify-content: space-around;
     flex-wrap: wrap;
     flex-grow: 1;
-    height: 250px;
+    height: 80px;
 }
 
 .logos {
     display: flex;
     flex-basis: 100%;
     flex-grow: 1;
-    justify-content: space-around;
+    justify-content: space-evenly;
 }
 
 
+.logo_Labs {
+    float:right;
+    padding-right: 10px;
+}
+.logo_Projeto {
+    padding-left: 10px;
+}
+.Nome_Escrito {
+    padding-left: 10px;
+    padding-right: 10px;
+}
 /* Caso queira ajustar cada logo individualmente
-.logo_Projeto {}
 
-.logo_Labs {}
 
-.Nome_Escrito {}
 */
 
 body {
+    margin: 0;
     font-family: 'Nunito Sans', sans-serif;
-    background-color: #4F628E;
+    background-color: white;
 }
 
 .teste{
@@ -128,7 +137,7 @@ body {
 /* Formatação de Textos */
 
 .title {
-    font-size: 3em;
+    font-size: 1.5em;
     color: #FFF;
     display: block;
     text-align: center;
@@ -158,6 +167,7 @@ body {
 }
 
 .output_container {
+    margin-top: 18%;
     margin-right: 5%;
     display: flex;
     flex-direction: column;
@@ -168,14 +178,15 @@ body {
 .output_pred {
     display: flex;
     background-color: #421B61;
-    border-radius: 50px;
+    border-top-right-radius: 50px;
+    border-bottom-right-radius: 50px;
     margin: 5% 0%;
     padding: 0 20px;
 }
 
 .output_pred img {
     float: left;
-    margin: 0 30px 0 -40px;
+    margin: 0 30px 0 -60px;
     height: 80px;
     width: 80px;
     border-radius: 50%;
@@ -206,31 +217,11 @@ body {
 	grid-template-columns: 1fr 1fr 1fr;
 }
 
-/* O repeat vai repetir o número de colunas */
-.grid-template-columns-4 {
-	grid-template-columns: repeat(3, 1fr);
-}
-
-/* Auto-fit vai calcular automaticamente o total de colunas */
-.grid-template-columns-5 {
-	grid-template-columns: repeat(auto-fit, 100px);
-}
-
-/* Com o auto-fit realmente é criado um layout responsivo */
-.grid-template-columns-6 {
-	grid-template-columns: repeat(auto-fit, minmax(100px, auto));
-}
-
-/* Com o auto-fit realmente é criado um layout responsivo */
-.grid-template-columns-7 {
-	grid-template-columns: repeat(auto-fill, minmax(100px, auto));
-}
-
-
 /* Estilos Gerais */
 .input_Data_2 {
     margin-left: 10px;
     margin-top: 10px;
+    border: 1px solid black;
 }
 
 .grid {
@@ -260,6 +251,7 @@ body {
 
 .Calcular_2 {
     margin-top: 10px;
+    margin-left: 10px;
 }
 
 .Calcular_2>input {
@@ -274,4 +266,22 @@ body {
     border-color: #FFF;
     margin: 0 2%;
     border: 1px solid white;
+}
+
+#trapezoid {
+    transform: rotate(-180deg);
+    border-bottom: 40rem solid black;
+    border-left: 150vw solid transparent;
+    height: 0;
+    z-index: -1;
+    position:absolute;
+
+}
+
+.title_2 {
+    margin-top: 10px;
+    font-size: 2em;
+    font-weight: bold;
+    color: #FFF;
+    text-align: center;
 }
